@@ -1,8 +1,11 @@
 import axios from "axios";
 
 export default {
-    getAllProducts: () => {
-        return axios.get("https://localhost:3000/api/products");
+    getAllProducts: (q) => {
+        if (!q) {
+            q = "iphone*"
+        }
+        return axios.get("/api/products?q="+q);
     },
     getByCategory: (category) => {
         return axios.get("/api/products/"+category);

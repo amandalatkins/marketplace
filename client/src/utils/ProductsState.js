@@ -5,26 +5,18 @@ const { Provider } = ProductsContext;
 
 const reducer = (state, action) => {
     switch (action.type) {
-      case "category":
-        return [ 
+      case "update":
+        return {
           ...state,
-          action.item
-        ];
-      case "remove":
-        return state.filter(item => item.id !== action.item.id);
-      case "quantity":
-        action.item.quantity = action.newQuantity;
-        return [
-            ...state,
-            action.item
-        ];
+          products: action.products
+        };
       default:
         throw new Error(`Invalid action type: ${action.type}`);
     }
   };
 
   const ProductsProvider = ({ value = [], ...props }) => {
-    const [state, dispatch] = useReducer(reducer, []);
+    const [state, dispatch] = useReducer(reducer, { products: value });
   
     return <Provider value={[state, dispatch]} {...props} />;
   };
