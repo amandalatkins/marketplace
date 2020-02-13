@@ -19,21 +19,22 @@ module.exports = {
       .catch(err => console.log(err));
   },
   findByClass: function(req, res) {
-    if (req.query.q === "") {
-      req.query.q = "mobile";
-    }
-    console.log("REQ CONTR: ", req.query.q);
-    res.json(true);
-    // axios
-    //   .get(
-    //     `https://api.bestbuy.com/v1/products(departmentId=
-    //     ${req.params.id})?format=json&apiKey=${process.env.BEST_BUY_API_KEY}`
-    //   )
-    //   .then(results => {
-    //     console.log("RESULTS!!!: ", results.data);
-    //     res.json([...results.data.products]);
-    //   })
-    //   .catch(err => console.log(err));
+    // if (req.query.q === "") {
+    //   req.query.q = "mobile";
+    // }
+    // console.log("REQ CONTR: ", req.query.q);
+    // res.json(true);
+    console.log(req);
+    axios
+      .get(
+        `https://api.bestbuy.com/v1/products(categoryPath.id=
+        ${req.params.id})?format=json&apiKey=${process.env.BEST_BUY_API_KEY}`
+      )
+      .then(results => {
+        console.log("RESULTS!!!: ", results.data);
+        res.json([...results.data.products]);
+      })
+      .catch(err => res.status(400).json(err));
   },
   findById: function(req, res) {
     axios

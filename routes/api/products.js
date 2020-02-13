@@ -9,14 +9,14 @@ router
 
 // Matches with "/api/products/:id"
 router
-  .route("/:id")
+  .route("/id/:id")
   .get(productsController.findById)
   .put(productsController.update)
   .delete(productsController.remove);
 
 // Matches with "/api/products/category"
 router
-  .route("/category")
+  .route("/category/:id")
   .get(productsController.findByClass)
 
 module.exports = router;

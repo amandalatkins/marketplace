@@ -8,9 +8,10 @@ export default {
         return axios.get("/api/products?q="+q);
     },
     getByCategory: (category) => {
-        return axios.get("/api/products/"+category);
+        return axios.get("/api/products/category/"+category);
     },
     getByID: (id) => {
-        return axios.get("/api/products/"+id);
-    }
+        return axios.get("/api/products/id/"+id);
+    },
+    
 }
