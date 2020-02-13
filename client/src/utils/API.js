@@ -7,6 +7,9 @@ export default {
         }
         return axios.get("/api/products?q="+q);
     },
+    getCart: () => {
+        return axios.get("/api/products/cart");
+    },
     getByCategory: (category) => {
         return axios.get("/api/products/category/"+category);
     },

@@ -7,6 +7,10 @@ router
   .get(productsController.findAll)
   .post(productsController.create);
 
+router
+.route("/cart")
+.get(productsController.fetch);
+
 // Matches with "/api/products/:id"
 router
   .route("/id/:id")

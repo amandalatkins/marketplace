@@ -48,6 +48,12 @@ module.exports = {
       })
       .catch(err => console.log(err));
   },
+  fetch: function(req, res) {
+    db.Product.findAll({})
+    .sort('name')
+    .then(results => res.json(results))
+    .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.Product.create(req.body)
       .then(dbModel => res.json(dbModel))
