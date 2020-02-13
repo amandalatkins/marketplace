@@ -3,7 +3,6 @@ import React from "react";
 import { useCartContext } from "../../utils/CartState";
 
 function Product(props) {
-    console.log(props);
     return (
         <div className="col-xs-12 col-md-6 col-lg-4 mb-4">
             <div className="card product">
@@ -21,7 +20,8 @@ function Product(props) {
                         categories: JSON.stringify(props.categories),
                         image: props.image,
                         shortDesc: props.shortDesc,
-                        longDesc: props.longDesc
+                        longDesc: props.longDesc,
+                        quantity: 1
                     })}>Add to Cart</a>
                 </div>
             </div>

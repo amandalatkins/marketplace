@@ -9,6 +9,7 @@ const productSchema = new Schema({
   image: String,
   rating: String,
   categories: String,
+  quantity: Number,
   post_date: { type: Date, default: Date.now }
 });
 

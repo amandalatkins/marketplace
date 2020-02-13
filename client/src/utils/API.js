@@ -19,6 +19,9 @@ export default {
     addProduct: (product) => {
         return axios.post('/api/products', product);
     },
+    removeProduct: (id) => {
+        return axios.delete('/api/products/id/'+id);
+    },
     userLogin: (user) => {
         return axios.post('/api/users/login', user);
     },

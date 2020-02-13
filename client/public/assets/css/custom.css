@@ -9,3 +9,8 @@
 .image-container {
     padding: 1em;
 }
+
+.cart-item .image-container .img {
+    width: 75px;
+    height: 150px;
+}

@@ -10,6 +10,8 @@ const reducer = (state, action) => {
           ...state,
           action.item
         ];
+      case "all":
+        return action.cart;
       case "remove":
         return state.filter(item => item.id !== action.item.id);
       case "quantity":

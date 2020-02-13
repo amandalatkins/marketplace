@@ -3,26 +3,25 @@ import React from "react";
 import { useCartContext } from "../../utils/CartState";
 
 function CartItem(props) {
-    const item = props.item;
+    const { item, handleRemove } = props;
+
     return (
-        <tr className="cart-item">
-            <td style={{width:"20%"}}>
+        <tr className="cart-item" key={item.sku}  scope="row">
+            <td>
                 <div className="image-container">
                     <div className="img" style={{backgroundImage: `url(${item.image})`}}></div>
                 </div>
             </td>
             <td>
                 <h5>{item.name}</h5>
-                <p dangerouslySetInnerHTML={{__html: item.longDesc }}></p>
+                <p dangerouslySetInnerHTML={{__html: item.shortDesc }}></p>
             </td>
             <td>
-                <input name="quantity" type="text"/>
-                <p><a href="#">Remove</a></p>
+                <input className="form-control text-center" name="quantity" type="text" value={item.quantity}/>
+                <p><button className="btn btn-sm text-danger" onClick={() => handleRemove(item._id)}>Remove</button></p>
             </td>
             <td>
                 ${item.price}
-            </td>
-            <td>
             </td>
         </tr>
     );

@@ -23,6 +23,7 @@ function Home(props) {
     useEffect(() => {
         loadProducts();
         loadCategories();
+        loadCart();
     }, []);
 
     function loadProducts() {
@@ -40,10 +41,18 @@ function Home(props) {
         .catch(err => console.log(err));
     }
 
+    function loadCart() {
+        API.getCart().then(results => {
+            setCart({ type: "all", cart: results.data });
+        });
+    }
+
     function handleAddToCart(item) {
+
         API.addProduct(item)
-        .then(result => setCart({ type:"add", item: item }))
+        .then(result => setCart({ type:"add", item}))
         .catch(err => console.log(err));
+        
     }
 
     function handleFormSubmit(e) {
@@ -101,7 +110,6 @@ function Home(props) {
                 {products.products.map(product => {
                     return (<Product
                         key={product.sku}
-                        sku={product.sku}
                         name={product.name} 
                         price={product.regularPrice} 
                         categories={product.categoryPath} 

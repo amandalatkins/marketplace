@@ -49,7 +49,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
   fetch: function(req, res) {
-    db.Product.findAll({})
+    db.Product.find({})
     .sort('name')
     .then(results => res.json(results))
     .catch(err => res.status(422).json(err));
