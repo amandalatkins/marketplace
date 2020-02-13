@@ -2,7 +2,7 @@ import React from "react";
 import { useCartContext } from "../utils/CartState";
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function NavBar({ isLoggedIn }) {
 
     const [state] = useCartContext();
 
@@ -18,10 +18,27 @@ function NavBar() {
                         >Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link
+                    {isLoggedIn ? 
+                        (<Link
                             to="/cart"
                             className={window.location.pathname === "/cart" ? "nav-link active" : "nav-link"}
-                        >Cart &nbsp;<span className="badge badge-secondary">{state.length}</span></Link>
+                        >Cart &nbsp;<span className="badge badge-secondary">{state.length}</span></Link>)
+                        :
+                        (<Link
+                            to="/login"
+                            className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
+                        >Login/Register</Link>)
+                        }
+                    </li>
+                    <li className="nav-item">
+                    {isLoggedIn ? 
+                        (<Link
+                            to="/logout"
+                            className={window.location.pathname === "/login?but=logout" ? "nav-link active" : "nav-link"}
+                        >Log Out</Link>)
+                        :
+                        ""
+                        }
                     </li>
                 </ul>
             </div>

@@ -15,5 +15,11 @@ export default {
     },
     addProduct: (product) => {
         return axios.post('/api/products', product);
+    },
+    userLogin: (user) => {
+        return axios.post('/api/users/login', user);
+    },
+    userRegister: user => {
+        return axios.post('/api/users/signup',user);
     }
 }

@@ -1,11 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
 import { useCartContext } from "../utils/CartState";
 import { useProductsContext } from "../utils/ProductsState";
+import isLoggedIn from "../utils/isLoggedIn";
 import API from "../utils/API";
 import Product from "../components/Product";
 import axios from "axios";
 
-function Home() {
+function Home(props) {
+
+    if (!isLoggedIn.isLoggedIn) {
+        props.history.push('/login');
+    }
 
     const [cart, setCart] = useCartContext();
     const [products, setProducts] = useProductsContext();
@@ -36,7 +41,9 @@ function Home() {
     }
 
     function handleAddToCart(item) {
-        setCart({ type:"add", item: item });
+        API.addProduct(item)
+        .then(result => setCart({ type:"add", item: item }))
+        .catch(err => console.log(err));
     }
 
     function handleFormSubmit(e) {
