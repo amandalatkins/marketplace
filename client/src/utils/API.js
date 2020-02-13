@@ -13,5 +13,7 @@ export default {
     getByID: (id) => {
         return axios.get("/api/products/id/"+id);
     },
-    
+    addProduct: (product) => {
+        return axios.post('/api/products', product);
+    }
 }
