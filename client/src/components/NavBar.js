@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function NavBar({ isLoggedIn }) {
 
-    const [state] = useCartContext();
+    const [cart] = useCartContext();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,27 +18,10 @@ function NavBar({ isLoggedIn }) {
                         >Home</Link>
                     </li>
                     <li className="nav-item">
-                    {isLoggedIn ? 
-                        (<Link
+                        <Link
                             to="/cart"
                             className={window.location.pathname === "/cart" ? "nav-link active" : "nav-link"}
-                        >Cart &nbsp;<span className="badge badge-secondary">{state.length}</span></Link>)
-                        :
-                        (<Link
-                            to="/login"
-                            className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
-                        >Login/Register</Link>)
-                        }
-                    </li>
-                    <li className="nav-item">
-                    {isLoggedIn ? 
-                        (<Link
-                            to="/logout"
-                            className={window.location.pathname === "/login?but=logout" ? "nav-link active" : "nav-link"}
-                        >Log Out</Link>)
-                        :
-                        ""
-                        }
+                        >Cart &nbsp;<span className="badge badge-secondary">{cart.length}</span></Link>
                     </li>
                 </ul>
             </div>

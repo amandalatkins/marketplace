@@ -1,16 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import { useCartContext } from "../utils/CartState";
 import { useProductsContext } from "../utils/ProductsState";
-import isLoggedIn from "../utils/isLoggedIn";
 import API from "../utils/API";
 import Product from "../components/Product";
 import axios from "axios";
 
 function Home(props) {
-
-    if (!isLoggedIn.isLoggedIn) {
-        props.history.push('/login');
-    }
 
     const [cart, setCart] = useCartContext();
     const [products, setProducts] = useProductsContext();
@@ -92,8 +87,8 @@ function Home(props) {
                             <button type="submit" className="btn btn-primary">Search</button>
                         </div>
                         <div className="form-group float-right">
-                            <select ref={categoryInput} onChange={handleCategoryChange} placeholder="Select category...">
-                                <option value="" disabled selected>Select Category...</option>
+                            <select ref={categoryInput} onChange={handleCategoryChange} placeholder="Select category..." defaultValue="">
+                                <option value="" disabled>Select Category...</option>
 
                                 {categories.map(cat => {
                                     if (cat.id !== "1579550216270") {
@@ -110,6 +105,7 @@ function Home(props) {
                 {products.products.map(product => {
                     return (<Product
                         key={product.sku}
+                        sku={product.sku}
                         name={product.name} 
                         price={product.regularPrice} 
                         categories={product.categoryPath} 
@@ -118,6 +114,7 @@ function Home(props) {
                         shortDesc={product.shortDescription}
                         longDesc={product.longDescription}
                         handleAddToCart={handleAddToCart}
+                        inCart={cart.some(item => item.name === product.name)}
                     />);
                 })}
             </div>

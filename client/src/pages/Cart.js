@@ -3,7 +3,7 @@ import CartItem from "../components/CartItem";
 import { useCartContext } from "../utils/CartState";
 import API from "../utils/API";
 
-function Cart() {
+function Cart(props) {
 
     const [cart, setCart] = useCartContext();
 
@@ -23,6 +23,25 @@ function Cart() {
         .catch(err => console.log(err));
     }
 
+    function sendToCheckout() {
+        console.log("You can never checkout!");
+    }
+
+    function handleChange(item, quantity) {
+        item = { ...item, quantity}
+        API.updateQuantity(item)
+        .then(response => loadCart())
+        .catch(err => console.log(err));
+    }
+
+    function cartTot() {
+        var tempNum = 0;
+        for (var i = 0; i < cart.length; i++) {
+            tempNum += parseFloat(cart[i].price)*cart[i].quantity;
+        }
+        return tempNum;
+    }
+
     return (
         <div className="container my-5">
             <div className="row">
@@ -37,20 +56,18 @@ function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            { cart.length ? cart.map(item => <CartItem key={item._id} item={item} handleRemove={handleRemove} />) : <tr><td><a href="/">No items! Shop now.</a></td></tr> }
+                            { cart.length ? cart.map(item => <CartItem key={item._id} item={item} handleRemove={handleRemove} handleChange={handleChange} />) : <tr><td><a href="/">No items! Shop now.</a></td><td colSpan="3"></td></tr> }
                         </tbody>
                     </table>
                 </div>
                 <div className="col-xs-12 col-lg-3">
-                    <div className="bg-dark text-white p-3 text-right">
-                        <h5>Cart Total</h5> 
-                        <h3>$
-                            {                             
-                                cart.length ? ( cart.reduce((total, curItem) => {
-                                    return { price: parseFloat(total.price) + parseFloat(curItem.price) };
-                                 } ) ).price : ""
-                            }    
+                    <div className="border border-dark">
+                        <h5 className="bg-dark text-white p-3">Cart Total</h5> 
+                        <h3 className="p-3 text-center">${ cartTot()}    
                         </h3>
+                        <div className="p-3 text-center border-top border-dark">
+                            <button className="btn btn-success btn-lg w-100" onClick={sendToCheckout}>Check Out</button>
+                        </div>
                     </div>
                 </div>
 

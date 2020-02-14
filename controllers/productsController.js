@@ -31,7 +31,7 @@ module.exports = {
         ${req.params.id})?format=json&apiKey=${process.env.BEST_BUY_API_KEY}`
       )
       .then(results => {
-        console.log("RESULTS!!!: ", results.data);
+        // console.log("RESULTS!!!: ", results.data);
         res.json([...results.data.products]);
       })
       .catch(err => res.status(400).json(err));
@@ -39,7 +39,7 @@ module.exports = {
   findById: function(req, res) {
     axios
       .get(
-        `https://api.bestbuy.com/v1/products(productId=${
+        `https://api.bestbuy.com/v1/products(sku=${
           req.params.id
         })?format=json&apiKey=${process.env.BEST_BUY_API_KEY}`
       )

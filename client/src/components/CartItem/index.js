@@ -1,6 +1,4 @@
 import React from "react";
-// import styles from "./style.css";
-import { useCartContext } from "../../utils/CartState";
 
 function CartItem(props) {
     const { item, handleRemove } = props;
@@ -13,11 +11,11 @@ function CartItem(props) {
                 </div>
             </td>
             <td>
-                <h5>{item.name}</h5>
+                <h5><a href={"/product/"+item.sku}>{item.name}</a></h5>
                 <p dangerouslySetInnerHTML={{__html: item.shortDesc }}></p>
             </td>
             <td>
-                <input className="form-control text-center" name="quantity" type="text" value={item.quantity}/>
+                <input className="form-control text-center" name="quantity" type="number" min="1" defaultValue={item.quantity} onChange={(e) => props.handleChange(item, e.target.value)}/>
                 <p><button className="btn btn-sm text-danger" onClick={() => handleRemove(item._id)}>Remove</button></p>
             </td>
             <td>
