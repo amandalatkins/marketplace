@@ -10,6 +10,10 @@ An application built with the MERN stack that queries the Best Buy API for produ
 * [NodeJS](https://nodejs.org/)
 * [Best Buy API](https://developer.bestbuy.com/)
 
+## Deployed Link
+
+View this application on Heroku at: [https://still-fjord-32596.herokuapp.com/](https://still-fjord-32596.herokuapp.com/)
+
 ## Code Snippets
 
 The following code snippet shows the global cart state.
